@@ -1,7 +1,7 @@
 # console-game
 ターミナルで動くゲームです。
 
-## 実行
+## ゲームプレイ
 ```
 python3 main.py
 ```
