@@ -2,9 +2,8 @@ import copy, time
 from contains import *
 from player import Player
 from room import Room
-from main import game
 
-class Game():
+class Game:
     def __init__(self):
         self.game_finished = GAME_NOT_FINISHED
         self.rooms = []
@@ -151,16 +150,16 @@ class Game():
             self.player.show_status()  # ステータスの表示
             self.current_room.show_room()  # 部屋情報を表示
             print("自分はふと学校を振り返った")
-            if game.ending_count == 0:
+            if self.ending_count == 0:
               print("宿題を取りに来た時と変わらない、ごく普通の学校がそびえたっていた▼")
               print("NOMAL END")
-            if game.ending_count == 50:
+            if self.ending_count == 50:
               print("実験室の窓からたくさんの目が付いた猫が自分を睨んでいた▼")
               print("BAD END")
-            if game.ending_count == 100:
+            if self.ending_count == 100:
               print("実験室の窓から女の子が手を振っていた▼")
               print("TRUE END")
-            if game.ending_count == 150:
+            if self.ending_count == 150:
               print("実験室の窓から女の子が手を振っていた▼")
               print("またくるね▼")
               print("HAPPY END")

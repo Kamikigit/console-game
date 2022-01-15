@@ -2,7 +2,7 @@ import random
 from contains import *
 from ghost import Ghost
 from box import Box
-from main import game
+import global_value
 
 class Room():
     def __init__(self, room_id, room_map):
@@ -41,24 +41,24 @@ class Room():
 
     def move_player(self):
         while True:
-            game.player.room_id = self.room_id
-            game.player.room_map = self.map
-            game.player.check_room() #部屋の探索
-            game.player.set_destination()
+            global_value.game.player.room_id = self.room_id
+            global_value.game.player.map = self.map
+            global_value.game.player.check_room() #部屋の探索
+            global_value.game.player.set_destination(self.ghosts)
             # プレイヤーの移動決定
             # move = random.choice("WASD")
-            move = game.player.next
+            move = global_value.game.player.next
             if not(move == "W" or move == "A" or move == "S" or move == "D"):
                 if (move == "R"):
-                    game.show_gamerule()  # ゲームルールを表示
+                    global_value.game.show_gamerule()  # ゲームルールを表示
                     print()
                     # os.system("clear")
-                    game.player.show_status()  # ステータスの表示
+                    global_value.game.player.show_status()  # ステータスの表示
                     self.show_room()  # 部屋情報を表示
                 else: print("w, a, s, dを入力して下さい")
                 continue
             move = MOVE_POINT[move]
-            new_y, new_x = game.player.y + move[0], game.player.x + move[1]
+            new_y, new_x = global_value.game.player.y + move[0], global_value.game.player.x + move[1]
             # print(starty, startx, new_y, new_x)
             # 壁判定
             if new_y < 0 or new_y >= self.height or new_x < 0 or new_x >= self.width:
@@ -74,34 +74,34 @@ class Room():
                 continue
             # 出口判定
             if (self.map[new_y][new_x] == GOAL):
-                if (game.player.have_key):
-                    game.game_finished = GAME_FINISHED
+                if (global_value.game.player.have_key):
+                    global_value.game.game_finished = GAME_FINISHED
                 else:
                     print("鍵がない…▼")
             # 元のマズに戻す
-            if ((BOX <= game.last_move <= LIGHT) or (MONKEY <= game.last_move <= DIARY)):
-                self.map[game.player.y][game.player.x] = EMPTY
+            if ((BOX <= global_value.game.last_move <= LIGHT) or (MONKEY <= global_value.game.last_move <= DIARY)):
+                self.map[global_value.game.player.y][global_value.game.player.x] = EMPTY
             else:
-                self.map[game.player.y][game.player.x] = game.last_move    
+                self.map[global_value.game.player.y][global_value.game.player.x] = global_value.game.last_move    
             # 部屋移動
             if (26 <= self.map[new_y][new_x] <= 49):
                 # 上下の確保
                 if (TO_ROOF_TOP_UP <= self.map[new_y][new_x] <= TO_HALL_2F_DOWN):
                     if (TO_ROOF_TOP_UP <= self.map[new_y][new_x] <= TO_HALL_2F_UP):
-                        game.last_move = self.map[new_y][new_x] + 3  # 上から下へ
+                        global_value.game.last_move = self.map[new_y][new_x] + 3  # 上から下へ
                     elif (TO_HALL_3F_DOWN <= self.map[new_y][new_x] <= TO_HALL_1F_DOWN):
-                        game.last_move = self.map[new_y][new_x] - 3  # 下から上へ
+                        global_value.game.last_move = self.map[new_y][new_x] - 3  # 下から上へ
 
-                game.current_room = game.rooms[PORTAL[self.map[new_y][new_x]][0] - 100]
-                game.player.x = PORTAL[self.map[new_y][new_x]][2]
-                game.player.y = PORTAL[self.map[new_y][new_x]][1]
+                global_value.game.current_room = global_value.game.rooms[PORTAL[self.map[new_y][new_x]][0] - 100]
+                global_value.game.player.x = PORTAL[self.map[new_y][new_x]][2]
+                global_value.game.player.y = PORTAL[self.map[new_y][new_x]][1]
                 return True
             self.valid_event(new_x, new_y)
-            game.player.y = new_y
-            game.player.x = new_x
-            game.last_move = self.map[new_y][new_x]  # 元のマズを確保
+            global_value.game.player.y = new_y
+            global_value.game.player.x = new_x
+            global_value.game.last_move = self.map[new_y][new_x]  # 元のマズを確保
             self.map[new_y][new_x] = 99
-            game.player.SAN -= 1
+            global_value.game.player.SAN -= 1
             # self.show_room()
             return False
 
@@ -166,7 +166,7 @@ class Room():
             
             # 当たり判定を変えたターンにはプレイヤーのSAN値を削る
             if (ghost.hit and ghost.count==0):
-                game.player.SAN -= 10
+                global_value.game.player.SAN -= 10
                 print("幽霊に当たった…SAN値が10ポイント減少した…")
                 print("今のうちに逃げよ！幽霊は５ターン動かない！▼")
                 
@@ -176,29 +176,29 @@ class Room():
             Ghost.show_monkey()
             print()
             print("おもちゃの猿がこちらを見つめている。 SAN値が5ポイント減少した。▼")
-            game.player.SAN -= 5
+            global_value.game.player.SAN -= 5
         if self.map[new_y][new_x] == PHANTOM:
             print("見えない何かが横切った。 SAN値が5ポイント減少した。▼")
             print()
-            game.player.SAN -= 5
+            global_value.game.player.SAN -= 5
         if self.map[new_y][new_x] == MIRROR:
             print("鏡の向こうの自分がほほ笑んだ… SAN値が5ポイント減少した。▼")
             print()
-            game.player.SAN -= 5
+            global_value.game.player.SAN -= 5
         if self.map[new_y][new_x] == CAT:
             Ghost.show_cat()
-            if game.ending_count == 100:
+            if global_value.game.ending_count == 100:
               print("女の子の影が猫を追い払ってくれた▼")
             print("……。SAN値が5ポイント減少した…▼")
             
-            game.ending_count += 50
-            game.player.SAN -= 5
+            global_value.game.ending_count += 50
+            global_value.game.player.SAN -= 5
         if self.map[new_y][new_x] == LIGHT:
             Box.show_light()
             print("懐中電灯を手に入れた。 SAN値が20ポイント回復した。▼")
-            game.player.SAN += 20
-            if game.player.SAN > 101:
-                game.player.SAN = 101
+            global_value.game.player.SAN += 20
+            if global_value.game.player.SAN > 101:
+                global_value.game.player.SAN = 101
         if self.map[new_y][new_x] == DIARY:
             # os.system("clear")
             print("7月12日　晴れ\n親の仕事の関係で引っ越してきた。\nもうすぐ夏休みだし、新しい学校では友達作りたいな　▽　")
@@ -225,33 +225,33 @@ class Room():
             # os.system("clear")
             print("「me me curse you」　▽　")
             # os.system("clear")
-            game.ending_count += 100
+            global_value.game.ending_count += 100
         if self.map[new_y][new_x] == BOX:
             Box.show_box()
-            game.player.box_count += 1
+            global_value.game.player.box_count += 1
             print("Enterで開ける")
             while True:
-                item = random.choice(game.events)
-                if (game.player.box_count < 5 and item == KEY and (self.room_id == CLASSROOM_3F or 
+                item = random.choice(global_value.game.events)
+                if (global_value.game.player.box_count < 5 and item == KEY and (self.room_id == CLASSROOM_3F or 
                                     self.room_id == ARTROOM_3F or self.room_id == MUSICROOM_3F)):
                     continue  # 鍵が三階の部屋に出た場合、選択しなおす
                 break
-            game.events.remove(item)
+            global_value.game.events.remove(item)
             if item == LIGHT:
                 Box.show_light()
                 print("懐中電灯を手に入れた。 SAN値が20ポイント回復した▼")
-                game.player.SAN += 20
-                if game.player.SAN > 101:
-                    game.player.SAN = 101
+                global_value.game.player.SAN += 20
+                if global_value.game.player.SAN > 101:
+                    global_value.game.player.SAN = 101
             if item == TRAP:
                 Box.show_trap()
                 print("罠だ！ SAN値が10ポイント減少した▼")
-                game.player.SAN -= 10
+                global_value.game.player.SAN -= 10
             if item == MISS:
                 Box.show_empty()
                 print("空箱だった・・・▼")
             if item == KEY:
                 Box.show_key()
                 print("鍵を入手した！▼")
-                game.player.have_key = True
+                global_value.game.player.have_key = True
 
