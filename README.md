@@ -1,12 +1,12 @@
 # console-game
-ターミナルで動くゲームです。
+ターミナルで動くホラーアドベンチャーゲームです。
+エンディングは3つあります。
+python3があれば動きます。
 
 ## ゲームプレイ
 ```
 python3 main.py
 ```
-
-WinかMacの場合は`os.system("clear")`を`os.system('cls')`にして下さい
 
 ## AIでのプレイ
 ```

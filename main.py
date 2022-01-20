@@ -203,7 +203,7 @@ class Room():
                 if (move == "R"):
                     game.player.show_gamerule()  # ゲームルールを表示
                     input()
-                    os.system("clear")
+                    clearConsole()
                     game.player.show_status()  # ステータスの表示
                     self.show_room()  # 部屋情報を表示
                 else: print("w, a, s, dを入力して下さい")
@@ -351,31 +351,31 @@ class Room():
             if game.player.SAN > 101:
                 game.player.SAN = 101
         if self.map[new_y][new_x] == DIARY:
-            os.system("clear")
+            clearConsole()
             input("7月12日　晴れ\n親の仕事の関係で引っ越してきた。\nもうすぐ夏休みだし、新しい学校では友達作りたいな　▽　")
-            os.system("clear")
+            clearConsole()
             input("7月13日　雨\n今日は夏休み前のレクリエーションがあった。\nあんまりみんなの輪には入れなかったけど\n2種目目のトランプゲームはとても楽しかった。　▽　")
-            os.system("clear")
+            clearConsole()
             input("7月15日　雨\nクラスの子たちが夏休みの予定を立てていたけど声をかけることができなかった…\n私の家はパパとママも忙しいだろうし今年も1人なのかな…　▽　")
-            os.system("clear")
+            clearConsole()
             input("7月18日　晴れ\n今日は理科のおばあちゃんの先生に連れられて実験室に来た\nたぶん引っ越してきたばかりの私を心配してくれたのかな？\n暇なときはいつでもここに来ていいみたい！\n実験室にはネコも遊びにくるみたいだし日記はここで書くことに決めた　▽　")
-            os.system("clear")
+            clearConsole()
             input("7月19日　曇り\n今日も実験室に遊びに行った。昨日見かけたネコもいたからネコちゃんと遊んだ\n遊んでるときにどこかから視線を感じたけど気のせいだったかな？　▽　")
-            os.system("clear")
+            clearConsole()
             input("7月20日　曇り\n明後日から夏休みが始まるから宿題を配られた　\n今日全部終わらせるって言ってる子もいたけど、私は毎日コツコツやろうかな\n放課後実験室に遊びに行ったけど今日はネコはいなかった\n部屋のはしっこで何かが動いた。この部屋は様子がおかしいかもしれない\nめまいがしたので今日は早めに家に帰ろうと決めた　▽　")
-            os.system("clear")
+            clearConsole()
             input("7月21日　曇り\n今日は終業式があった。みんなは楽しそうにしてた\n夏休みの間ネコちゃんに会えないから、会うために実験室に行った\nネコちゃんはいなかったから待ってみることにした　▽　")
         
             input("夕方になってしまった\n帰ろうかなって思ったらネコちゃんが来てくれた！\n今日は友達もつれてきたみたいだけどずっとかべをカリカリとひっかいていた　▽　")
-            os.system("clear")
+            clearConsole()
             input("カリカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリ\nカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリ　▽　")
-            os.system("clear")
+            clearConsole()
             input("ここで日記は終わっている　▽　")
-            os.system("clear")
+            clearConsole()
             input("裏に何か書いてある　▽　")
-            os.system("clear")
+            clearConsole()
             input("「me me curse you」　▽　")
-            os.system("clear")
+            clearConsole()
             game.ending_count += 100
         if self.map[new_y][new_x] == BOX:
             Box.show_box()
@@ -478,7 +478,7 @@ class Ghost:
 
     def show_cat():
         
-        os.system("clear")
+        clearConsole()
 
         print("ねこだ！！SAN値が…")
         print("        ,-､　　　　　　　　　　　 　,.-､")
@@ -494,7 +494,7 @@ class Ghost:
         print("　　　`ｰ ､__　　　　　　　 　　 　　　 ／")
         print("　　　　　　　 `---ｰ‐‐──‐‐‐┬-----------´")
         input()
-        os.system("clear")
+        clearConsole()
 
         print("        ,-､　　　　　　　　　　　   　,.-､")
         print("      ./:::::＼　　　　　　　　　 ／::::::ヽ")
@@ -585,7 +585,7 @@ class Player():
         self.player_name = name[0]
         input("今からお前の名前は" + self.player_name + "だ。いいかい、" + self.player_name + "だよ。\nわかったら返事をするんだ、" + self.player_name + "！▼")
         SHOW_NAME[PLAYER] =  self.player_name
-        os.system("clear")
+        clearConsole()
 
     def game_title(self):
         print('\033[31m' + "■■■■■■  ■■■■■   ■      ■■■■■■       ")
@@ -598,53 +598,53 @@ class Player():
         print("Enterを押してゲーム開始")
 
     def print_prologue(self):
-        os.system("clear")
+        clearConsole()
         input("7月21日▼")
-        os.system("clear")
+        clearConsole()
         input("先生「皆さんさようなら、夏休み中体に気を付けて過ごしてくださいね」▼")
-        os.system("clear")
+        clearConsole()
         input("自分「よーし、学校終わって夏休みだー！いっぱい遊ぶぞ！！！」▼")
-        os.system("clear")
+        clearConsole()
         input("クラスの人達「コソコソ...10年前だけど、夏休み前に行方不明になっちゃった女の子がいるんだって」\n　　　　　　「こえーなそれ今年は肝試しでもしようぜ！！」▼")
-        os.system("clear")
+        clearConsole()
         input("自分も誘ってもらえないかな～と考えつつ家に帰った▼")
-        os.system("clear")
+        clearConsole()
         input("▼")
-        os.system("clear")
+        clearConsole()
         input("7時間後… 自宅にて▼")
-        os.system("clear")
+        clearConsole()
         input("自分「ごちそうさまでした～」▼")
-        os.system("clear")
+        clearConsole()
         input("母「夏休みの宿題は毎日ちゃんとやるのよ」▼")
-        os.system("clear")
+        clearConsole()
         input("自分「わかってるよ」\n　　「そんなこと言われなくてもやるって」▼")
-        os.system("clear")
+        clearConsole()
         input("自分は母親に愚痴を言いつつ2階に上って自分の部屋に入った▼")
-        os.system("clear")
+        clearConsole()
         input("自分「ってあれ！？」▼")
-        os.system("clear")
+        clearConsole()
         input("カバンに宿題がはいってないことに気が付いた▼")
-        os.system("clear")
+        clearConsole()
         input("自分「明日から1週間学校がしまるから今すぐいかないと」▼")
-        os.system("clear")
+        clearConsole()
         input("自分「お母さん学校行ってくる！」▼")
-        os.system("clear")
+        clearConsole()
         input("階段を駆け下りて母親にそう告げると急いで学校に向かった▼")
-        os.system("clear")
+        clearConsole()
         input("学校に着くころにはあたりは暗くなっていた▼")
-        os.system("clear")
+        clearConsole()
         input("裏口から忍び込んで早く帰ることにした▼")
-        os.system("clear")
+        clearConsole()
         input("宿題を手に取ったところで女性の笑い声が聞こえた\n何かをひっかいた変な音が耳に響きわたる\n自分はその場に倒れてしまった▼")
-        os.system("clear")
+        clearConsole()
         input("・・・・・・・・・・・・・・・")
-        os.system("clear")
+        clearConsole()
         input("目が覚めるとなぜか廊下に立っていた▼")
-        os.system("clear")
+        clearConsole()
         input("あたりは暗いがぼんやりと周りが見えるくらいの不思議な雰囲気が漂っていた▼")
-        os.system("clear")
+        clearConsole()
         input("ぼんやりしていると急に目の前に1人のおばあさんらしき人が現れた▼")
-        os.system("clear")
+        clearConsole()
 
     def check_san(self):
         if (self.SAN <= 0):
@@ -677,7 +677,7 @@ class Game():
         self.player.print_prologue()   #ゲームのプロローグ表示
         self.player.game_title()   # ゲームタイトルの表示
         input()
-        os.system("clear") 
+        clearConsole() 
         self.player.input_name()  # 名前を入力させる
 
     def save_door(self):
@@ -689,7 +689,7 @@ class Game():
         self.player.show_gamerule()  # ルールの表示
         input()  # 入力待ち
         while (self.game_finished == GAME_NOT_FINISHED):
-            os.system("clear")
+            clearConsole()
             
             self.player.show_status()  # ステータスの表示
             self.current_room.show_room()  # 部屋情報を表示
@@ -705,7 +705,7 @@ class Game():
             self.current_room.move_ghosts()  # 幽霊の移動
             self.current_room.ghost_check_around()  # 幽霊の周りにプレイヤーがいるかどうかを確認
         else:
-            os.system("clear")
+            clearConsole()
             self.player.show_status()  # ステータスの表示
             self.current_room.show_room()  # 部屋情報を表示
             print("自分はふと学校を振り返った")
@@ -734,6 +734,8 @@ class Game():
             else:
                 print("y, nを入力して下さい")
 
+clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+
 while True:
     game = Game()
     game.init_game()  # ゲームの初期化
@@ -749,5 +751,5 @@ while True:
     if game.replay() == "N":  # リプレイ確認
         break
         
-    os.system("clear")
+    clearConsole()
 input("ありがとうございました！▼")
