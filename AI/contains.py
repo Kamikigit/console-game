@@ -157,6 +157,3 @@ MAPS = [ROOF_TOP_MAP, HALL_3F_MAP, HALL_2F_MAP, HALL_1F_MAP, CLASSROOM_3F_MAP, C
 SHOW_ROOM = { ROOF_TOP : "屋上", HALL_3F : "廊下３F", HALL_2F : "廊下２F", HALL_1F : "廊下１F", CLASSROOM_3F : "教室３Ｆ",
               CLASSROOM_2F : "教室２Ｆ", CLASSROOM_1F : "教室１Ｆ", MUSICROOM_3F : "音楽室３F", ARTROOM_3F :  "美術室３F", 
               LABLATOR_2F : "実験室２F", CLOTHINGROOM_2F : "被服室２F", FACULTYROOM_1F : "教員室１F", FRONT_1F :"玄関１F"}
-
-YUU_ROOP = [1, 2, 3, 4, 3, 2, 1, 0]
-REI_ROOP = [4, 3, 2, 1, 0, 1, 2, 3]
