@@ -1,4 +1,4 @@
-import copy, time
+import copy, time, os
 from contains import *
 from player import Player
 from room import Room
@@ -11,6 +11,7 @@ class Game:
         self.player = Player()
         self.last_move = EMPTY
         self.ending_count = 0  # エンディング分岐用変数
+        self.clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 
 
     def game_title(self):
@@ -129,7 +130,7 @@ class Game:
         self.show_gamerule()  # ルールの表示
         print()  # 入力待ち
         while (self.game_finished == GAME_NOT_FINISHED):
-            # os.system("clear")
+            os.system("cls")
             
             self.player.show_status()  # ステータスの表示
             self.current_room.show_room()  # 部屋情報を表示
@@ -137,7 +138,7 @@ class Game:
                 break
 
             change_room = self.current_room.move_player()  # プレイヤーの移動
-            time.sleep(1)
+            time.sleep(0.5)
             if change_room:
                 self.save_door()
                 continue

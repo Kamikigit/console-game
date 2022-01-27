@@ -41,10 +41,21 @@ class Room():
 
     def move_player(self):
         while True:
+            #===========ここからAIの設定============#
             global_value.game.player.room_id = self.room_id
             global_value.game.player.map = self.map
-            global_value.game.player.check_room() #部屋の探索
+            # 箱、灯り、扉をチェック
+            if not self.room_id in global_value.game.player.room_visited:
+                if global_value.game.door_id != EMPTY: #扉と人がかぶるののでちゃんと扉を取得する
+                    self.map[global_value.game.door_y][global_value.game.door_x] =  global_value.game.door_id
+                global_value.game.player.check_room() #部屋の探索
+                global_value.game.player.room_visited.add(self.room_id) #訪問済みにする
+                # print(global_value.game.player.room_visited)
+            #目的地の設定
             global_value.game.player.set_destination(self.ghosts)
+            #==============ここまで====~=============#
+            #AIの中身はplayer.pyにあります
+
             # プレイヤーの移動決定
             # move = random.choice("WASD")
             move = global_value.game.player.next
@@ -63,6 +74,7 @@ class Room():
             # 壁判定
             if new_y < 0 or new_y >= self.height or new_x < 0 or new_x >= self.width:
                 print("そこには移動できません")
+                break
                 continue
             # 障害物判定
             if DESK <= self.map[new_y][new_x] <= SHOES:
@@ -200,30 +212,31 @@ class Room():
             if global_value.game.player.SAN > 101:
                 global_value.game.player.SAN = 101
         if self.map[new_y][new_x] == DIARY:
+            print("日記読了")
             # os.system("clear")
-            print("7月12日　晴れ\n親の仕事の関係で引っ越してきた。\nもうすぐ夏休みだし、新しい学校では友達作りたいな　▽　")
-            # os.system("clear")
-            print("7月13日　雨\n今日は夏休み前のレクリエーションがあった。\nあんまりみんなの輪には入れなかったけど\n2種目目のトランプゲームはとても楽しかった。　▽　")
-            # os.system("clear")
-            print("7月15日　雨\nクラスの子たちが夏休みの予定を立てていたけど声をかけることができなかった…\n私の家はパパとママも忙しいだろうし今年も1人なのかな…　▽　")
-            # os.system("clear")
-            print("7月18日　晴れ\n今日は理科のおばあちゃんの先生に連れられて実験室に来た\nたぶん引っ越してきたばかりの私を心配してくれたのかな？\n暇なときはいつでもここに来ていいみたい！\n実験室にはネコも遊びにくるみたいだし日記はここで書くことに決めた　▽　")
-            # os.system("clear")
-            print("7月19日　曇り\n今日も実験室に遊びに行った。昨日見かけたネコもいたからネコちゃんと遊んだ\n遊んでるときにどこかから視線を感じたけど気のせいだったかな？　▽　")
-            # os.system("clear")
-            print("7月20日　曇り\n明後日から夏休みが始まるから宿題を配られた　\n今日全部終わらせるって言ってる子もいたけど、私は毎日コツコツやろうかな\n放課後実験室に遊びに行ったけど今日はネコはいなかった\n部屋のはしっこで何かが動いた。この部屋は様子がおかしいかもしれない\nめまいがしたので今日は早めに家に帰ろうと決めた　▽　")
-            # os.system("clear")
-            print("7月21日　曇り\n今日は終業式があった。みんなは楽しそうにしてた\n夏休みの間ネコちゃんに会えないから、会うために実験室に行った\nネコちゃんはいなかったから待ってみることにした　▽　")
+            # print("7月12日　晴れ\n親の仕事の関係で引っ越してきた。\nもうすぐ夏休みだし、新しい学校では友達作りたいな　▽　")
+            # # os.system("clear")
+            # print("7月13日　雨\n今日は夏休み前のレクリエーションがあった。\nあんまりみんなの輪には入れなかったけど\n2種目目のトランプゲームはとても楽しかった。　▽　")
+            # # os.system("clear")
+            # print("7月15日　雨\nクラスの子たちが夏休みの予定を立てていたけど声をかけることができなかった…\n私の家はパパとママも忙しいだろうし今年も1人なのかな…　▽　")
+            # # os.system("clear")
+            # print("7月18日　晴れ\n今日は理科のおばあちゃんの先生に連れられて実験室に来た\nたぶん引っ越してきたばかりの私を心配してくれたのかな？\n暇なときはいつでもここに来ていいみたい！\n実験室にはネコも遊びにくるみたいだし日記はここで書くことに決めた　▽　")
+            # # os.system("clear")
+            # print("7月19日　曇り\n今日も実験室に遊びに行った。昨日見かけたネコもいたからネコちゃんと遊んだ\n遊んでるときにどこかから視線を感じたけど気のせいだったかな？　▽　")
+            # # os.system("clear")
+            # print("7月20日　曇り\n明後日から夏休みが始まるから宿題を配られた　\n今日全部終わらせるって言ってる子もいたけど、私は毎日コツコツやろうかな\n放課後実験室に遊びに行ったけど今日はネコはいなかった\n部屋のはしっこで何かが動いた。この部屋は様子がおかしいかもしれない\nめまいがしたので今日は早めに家に帰ろうと決めた　▽　")
+            # # os.system("clear")
+            # print("7月21日　曇り\n今日は終業式があった。みんなは楽しそうにしてた\n夏休みの間ネコちゃんに会えないから、会うために実験室に行った\nネコちゃんはいなかったから待ってみることにした　▽　")
         
-            print("夕方になってしまった\n帰ろうかなって思ったらネコちゃんが来てくれた！\n今日は友達もつれてきたみたいだけどずっとかべをカリカリとひっかいていた　▽　")
-            # os.system("clear")
-            print("カリカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリ\nカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリ　▽　")
-            # os.system("clear")
-            print("ここで日記は終わっている　▽　")
-            # os.system("clear")
-            print("裏に何か書いてある　▽　")
-            # os.system("clear")
-            print("「me me curse you」　▽　")
+            # print("夕方になってしまった\n帰ろうかなって思ったらネコちゃんが来てくれた！\n今日は友達もつれてきたみたいだけどずっとかべをカリカリとひっかいていた　▽　")
+            # # os.system("clear")
+            # print("カリカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリ\nカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリカリ　▽　")
+            # # os.system("clear")
+            # print("ここで日記は終わっている　▽　")
+            # # os.system("clear")
+            # print("裏に何か書いてある　▽　")
+            # # os.system("clear")
+            # print("「me me curse you」　▽　")
             # os.system("clear")
             global_value.game.ending_count += 100
         if self.map[new_y][new_x] == BOX:
